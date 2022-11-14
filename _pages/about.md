@@ -22,4 +22,5 @@ methods for untrimmed video understanding.
 Previously, I was a researcher at [Deep MI](https://deep-mi.org/) lab developing deep learning-based methods
 for semantic segmentation of brain MRI scans. Prior to starting my PhD, I was a visiting researcher at
 the [Computer Vision Group](https://pages.iai.uni-bonn.de/gall_juergen/)
-working on action recognition and future frame prediction under supervision of [Prof. Jürgen Gall](https://pages.iai.uni-bonn.de/gall_juergen/).       
+working on action recognition and future frame prediction under supervision of Prof. Jürgen Gall.
+Before University of Bonn, I completed my undergraduate degree at the University of Tehran.
