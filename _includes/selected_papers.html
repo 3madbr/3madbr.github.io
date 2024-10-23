@@ -1,7 +1,8 @@
 
           <div class="publications">
             <h2>selected publications<a href="{{ site.url }}{{ site.baseurl }}/publications">[view all]</a></h2>
-              <p style="font-size:12px"> * Indicates equal contribution </p>
+              <!-- <p style="font-size:12px"> * Indicates equal contribution </p> -->
                 {% bibliography -f papers -q @*[selected=true]* %}
+        
           </div>
 
