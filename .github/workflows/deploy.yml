@@ -13,6 +13,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write  # Required for deploying to GitHub Pages
 
 jobs:
   deploy:
@@ -21,7 +23,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Setup Ruby
+      - name: Setup Ruby 💎
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.1'
@@ -40,5 +42,5 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # or your preferred deploy branch
+          branch: gh-pages  # This must match your GitHub Pages source branch
           folder: _site
