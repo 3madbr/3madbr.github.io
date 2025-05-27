@@ -194,6 +194,7 @@ plugins:
   - jekyll-target-blank
   - jekyll-include-cache
   - jemoji
+  - jekyll-scholar
 
 # Sitemap settings
 defaults:
