@@ -1,27 +1,19 @@
 <!-- _layouts/bib.html -->
-<div class="row">
-  <div class="col-sm-3 {% if entry.preview %}preview{% else %}abbr{% endif %}">
+<div class="pub">
+  <div class="pub-thumb">
   {%- if entry.preview -%}
     {% if entry.preview contains '://' -%}
-    <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
+    <img class="preview" loading="lazy" alt="" src="{{ entry.preview }}">
     {%- else -%}
-    <img class="preview z-depth-1 rounded" src="{{ entry.preview | prepend: '/assets/img/publication_preview/' | relative_url }}">
+    <img class="preview" loading="lazy" alt="" src="{{ entry.preview | prepend: '/assets/img/publication_preview/' | relative_url }}">
     {%- endif -%}
   {%- elsif entry.abbr -%}
-    {%- if site.data.venues[entry.abbr] -%}
-      {%- assign venue_style = nil -%}
-      {%- if site.data.venues[entry.abbr].color != blank -%}
-        {%- assign venue_style = site.data.venues[entry.abbr].color | prepend: 'style="background-color:' | append: '"' -%}
-      {%- endif -%}
-      <abbr class="badge" {% if venue_style %}{{venue_style}}{% endif %}><a href="{{site.data.venues[entry.abbr].url}}">{{entry.abbr}}</a></abbr>
-    {%- else -%}
-      <abbr class="badge">{{entry.abbr}}</abbr>
-    {%- endif -%}
+    <div class="thumb-placeholder">{{ entry.abbr }}</div>
   {%- endif -%}
   </div>
 
   <!-- Entry bib key -->
-  <div id="{{entry.key}}" class="col-sm-8">
+  <div id="{{entry.key}}" class="pub-body">
   {% if entry.type == "thesis" -%}
     {{reference}}
   {%- else %}
@@ -66,12 +58,12 @@
         {%- if forloop.last and author_array_limit == author_array_size -%}and&nbsp;{%- endif -%}
       {%- endif -%}
       {%- if author_is_self -%}
-        <em>{{author.first}} {{author_last_name}}{% if has_asterisk %}*{% endif %}</em>
+        <strong class="me">{{author.first}} {{author_last_name}}{% if has_asterisk %}<span class="eq" title="Equal contribution">*</span>{% endif %}</strong>
       {%- else -%}
         {%- if coauthor_url -%}
-          <a href="{{coauthor_url}}">{{author.first}} {{author_last_name}}{% if has_asterisk %}*{% endif %}</a>
+          <a href="{{coauthor_url}}">{{author.first}} {{author_last_name}}{% if has_asterisk %}<span class="eq" title="Equal contribution">*</span>{% endif %}</a>
         {%- else -%}
-          {{author.first}} {{author_last_name}}{% if has_asterisk %}*{% endif %}
+          {{author.first}} {{author_last_name}}{% if has_asterisk %}<span class="eq" title="Equal contribution">*</span>{% endif %}
         {%- endif -%}
       {%- endif -%}
     {%- endfor -%}
@@ -117,87 +109,68 @@
       >{{more_authors_hide}}</span>
     {%- endif -%}
 
-    {% if has_equal_contribution %}
-    <br>
-    <span class="equal-contribution">* Indicates equal contribution.</span>
-    {% endif %}
     </div>
 
-     <!-- Journal/Book title and date -->
-          {% assign proceedings = "inproceedings, incollection" | split: ','%}
-          {% if entry.type == "article" -%}
-            {%- capture entrytype -%}<em>{{entry.journal}}</em>{%- endcapture -%}
-          {%- elsif proceedings contains entry.type -%}
-            {%- capture entrytype -%}<em>In {{entry.booktitle}}</em> {%- endcapture -%}
-          {%- else -%}
-            {%- capture entrytype -%}{%- endcapture -%}
-          {%- endif -%}
-          {%- if entry.month -%}
-            {%- capture entrymonth -%}{{ " " }}{{ entry.month | capitalize }}{%- endcapture -%}
-          {%- endif -%}
-          {%- if entry.year -%}
-            {%- capture entryyear -%}{{ " " }}{{entry.year}}{%- endcapture -%}
-          {%- endif -%}
-          {%- capture periodical -%}{{ entrytype }}{{ entrymonth }}{{ entryyear }}{%- endcapture -%}
-          <div class="periodical">
-            {{ periodical | strip }}
-          </div>
+    <!-- Venue -->
+    {% assign proceedings = "inproceedings, incollection" | split: ','%}
+    {%- if entry.type == "article" -%}
+      {%- assign venue = entry.journal -%}
+    {%- elsif proceedings contains entry.type -%}
+      {%- assign venue = entry.booktitle -%}
+    {%- else -%}
+      {%- assign venue = "" -%}
+    {%- endif %}
+    <div class="periodical">
+      {%- if entry.abbr %}<span class="venue-badge">{{ entry.abbr }} {{ entry.year }}</span>{% endif -%}
+      {%- if venue != entry.abbr %}<span class="venue">{{ venue }}{% unless entry.abbr %} {{ entry.year }}{% endunless %}</span>{% endif %}
+      {%- if has_equal_contribution %}<span class="eq-note">* Equal contribution</span>{% endif %}
+    </div>
+    {%- if entry.note %}
+    <div class="pub-note">{{ entry.note }}</div>
+    {%- endif %}
         {%- endif %}
 
           <!-- Links/Buttons -->
           <div class="links">
-          {%- if entry.abstract %}
-            <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
-          {%- endif %}
-          {%- if entry.arxiv %}
-            <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
-          {%- endif %}
-          {%- if entry.bibtex_show %}
-            <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
-          {%- endif %}
-          {%- if entry.html %}
-            <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
-          {%- endif %}
           {%- if entry.pdf %}
             {% if entry.pdf contains '://' -%}
-            <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+            <a href="{{ entry.pdf }}" class="pub-btn"><i class="far fa-file-alt"></i>Paper</a>
             {%- else -%}
-            <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+            <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="pub-btn"><i class="far fa-file-alt"></i>Paper</a>
             {%- endif %}
           {%- endif %}
-          {%- if entry.supp %}
-            {% if entry.supp contains '://' -%}
-            <a href="{{ entry.supp }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-            {%- else -%}
-            <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-            {%- endif %}
+          {%- if entry.arxiv %}
+            <a href="https://arxiv.org/abs/{{ entry.arxiv }}" class="pub-btn"><i class="ai ai-arxiv"></i>arXiv</a>
           {%- endif %}
-          {%- if entry.blog %}
-            <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
-          {%- endif %}
-          {%- if entry.code %}
-            <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
-          {%- endif %}
-          {%- if entry.poster %}
-            {% if entry.poster contains '://' -%}
-            <a href="{{ entry.poster }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-            {%- else -%}
-            <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-            {%- endif %}
-          {%- endif %}
-          {%- if entry.slides %}
-            {% if entry.slides contains '://' -%}
-            <a href="{{ entry.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-            {%- else -%}
-            <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+          {%- if entry.html %}
+            {%- if entry.pdf %}
+            <a href="{{ entry.html }}" class="pub-btn"><i class="fas fa-globe"></i>Project</a>
+            {%- else %}
+            <a href="{{ entry.html }}" class="pub-btn"><i class="far fa-file-alt"></i>Paper</a>
             {%- endif %}
           {%- endif %}
           {%- if entry.website %}
-            <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
+            <a href="{{ entry.website }}" class="pub-btn"><i class="fas fa-globe"></i>Project</a>
           {%- endif %}
-          {%- if entry.altmetric %}
-            <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script><div data-altmetric-id="{{ entry.altmetric }}" class="altmetric-embed" data-hide-no-mentions="true" data-hide-less-than="15" data-badge-popover="right" data-badge-type="2" style="display:inline"></div>
+          {%- if entry.code %}
+            <a href="{{ entry.code }}" class="pub-btn"><i class="fab fa-github"></i>Code</a>
           {%- endif %}
+          {%- if entry.supp %}
+            <a href="{% if entry.supp contains '://' %}{{ entry.supp }}{% else %}{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}{% endif %}" class="pub-btn">Supp</a>
+          {%- endif %}
+          {%- if entry.poster %}
+            <a href="{% if entry.poster contains '://' %}{{ entry.poster }}{% else %}{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}{% endif %}" class="pub-btn">Poster</a>
+          {%- endif %}
+          {%- if entry.slides %}
+            <a href="{% if entry.slides contains '://' %}{{ entry.slides }}{% else %}{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}{% endif %}" class="pub-btn">Slides</a>
+          {%- endif %}
+          {%- if entry.blog %}
+            <a href="{{ entry.blog }}" class="pub-btn">Blog</a>
+          {%- endif %}
+          {%- if entry.abstract %}
+            <a class="abstract pub-btn" role="button">Abstract</a>
+          {%- endif %}
+            <a class="bibtex pub-btn" role="button"><i class="fas fa-quote-right"></i>BibTeX</a>
           </div>
 
           {% if entry.abstract -%}
@@ -207,11 +180,9 @@
           </div>
           {%- endif -%}
 
-          {% if entry.bibtex_show -%}
           <!-- Hidden bibtex block -->
           <div class="bibtex hidden">
             {% highlight bibtex %}{{ entry.bibtex | hideCustomBibtex }}{% endhighlight %}
           </div>
-          {%- endif %}
         </div>
       </div>

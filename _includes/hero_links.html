@@ -1,0 +1,18 @@
+{%- if site.email -%}
+<a class="hero-btn" href="mailto:{{ site.email | encode_email }}"><i class="fas fa-envelope"></i>Email</a>
+{%- endif -%}
+{%- if site.scholar_userid -%}
+<a class="hero-btn" href="https://scholar.google.com/citations?user={{ site.scholar_userid }}"><i class="ai ai-google-scholar"></i>Scholar</a>
+{%- endif -%}
+{%- if site.github_username -%}
+<a class="hero-btn" href="https://github.com/{{ site.github_username }}"><i class="fab fa-github"></i>GitHub</a>
+{%- endif -%}
+{%- if site.linkedin_username -%}
+<a class="hero-btn" href="https://www.linkedin.com/in/{{ site.linkedin_username }}"><i class="fab fa-linkedin"></i>LinkedIn</a>
+{%- endif -%}
+{%- if site.twitter_username -%}
+<a class="hero-btn" href="https://x.com/{{ site.twitter_username }}"><i class="fab fa-twitter"></i>X</a>
+{%- endif -%}
+{%- if site.orcid_id -%}
+<a class="hero-btn" href="https://orcid.org/{{ site.orcid_id }}"><i class="ai ai-orcid"></i>ORCID</a>
+{%- endif -%}

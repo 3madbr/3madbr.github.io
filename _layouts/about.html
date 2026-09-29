@@ -3,66 +3,56 @@ layout: default
 ---
 
 <!-- about.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 class="post-title">
-           {% if site.title == "blank" -%}<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} {{ site.last_name }}{%- else -%}{{ site.title }}{%- endif %}
-          </h1>
-          <p class="desc">{{ page.subtitle }}</p>
+      <div class="post home">
+
+        <!-- Hero -->
+        <header class="hero">
+          {% if page.profile.image -%}
+          <div class="hero-photo">
+            {%- assign profile_image_path = page.profile.image | prepend: 'assets/img/' -%}
+            {% include figure.html
+            path=profile_image_path
+            class="img-fluid rounded-circle"
+            alt=site.first_name -%}
+          </div>
+          {%- endif %}
+
+          <div class="hero-text">
+            <h1 class="hero-name">
+              {%- if site.title == "blank" -%}{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}{%- else -%}{{ site.title }}{%- endif -%}
+            </h1>
+            {% if page.subtitle -%}<p class="hero-role">{{ page.subtitle }}</p>{%- endif %}
+            {% if page.focus -%}<p class="hero-focus">{{ page.focus }}</p>{%- endif %}
+            {% if page.job_market -%}
+            <p class="hero-status"><span class="dot"></span>{{ page.job_market }}</p>
+            {%- endif %}
+            {%- if page.social %}
+            <div class="hero-links">
+              {% include hero_links.html %}
+            </div>
+            {%- endif %}
+          </div>
         </header>
 
         <article>
-          {% if page.profile -%}
-          <div class="profile float-{%- if page.profile.align == 'left' -%}left{%- else -%}right{%- endif -%}">
-            {%- if page.profile.image %}
-              {%- assign profile_image_path = page.profile.image | prepend: 'assets/img/' -%}
+          <section class="home-section">
+            <h2 class="section-title">About</h2>
+            <div class="bio">
+              {{ content }}
+            </div>
+          </section>
 
-              {% if page.profile.image_circular %}
-                {%- assign profile_image_class = "img-fluid z-depth-1 rounded-circle" -%}
-              {% else %}
-                {%- assign profile_image_class = "img-fluid z-depth-1 rounded" -%}
-              {% endif %}
-
-              {% include figure.html
-              path=profile_image_path
-              class=profile_image_class
-              alt=page.profile.image -%}
-            {% endif -%}
-<!--            {%- if page.profile.address %}-->
-<!--            <div class="address">-->
-<!--              {{ page.profile.address }}-->
-<!--            </div>-->
-<!--            {%- endif %}-->
-          </div>
-          {%- endif %}
-
-          <div class="clearfix" align="justify">
-            {{ content }}
-          </div>
-
-           <!-- News -->
           {% if page.news -%}
-            <h2><a href="{{ '/news/' | relative_url }}" style="color: inherit;">news</a></h2>
+          <section class="home-section">
+            <h2 class="section-title">News</h2>
             {%- include news.html limit=true %}
+          </section>
           {%- endif %}
-
 
           {% if page.selected_papers -%}
-            <!-- Selected papers -->
+          <section class="home-section">
             {%- include selected_papers.html %}
-          {%- endif %}
-          {%- if page.social %}
-          <!-- Social -->
-          <div class="social">
-            <div class="contact-icons">
-            {% include social.html %}
-            </div>
-
-            <div class="contact-note">
-              {{ site.contact_note }}
-            </div>
-            
-          </div>
+          </section>
           {%- endif %}
         </article>
 
