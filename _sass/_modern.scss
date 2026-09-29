@@ -166,6 +166,17 @@ footer.sticky-bottom {
     color: var(--global-success-color);
     margin: 0 0 1.1rem;
 
+    > span { color: inherit; }  // base theme colours every <span>; keep the green
+
+    // CV / Email links after the status text: accent colour, like the bio links.
+    a {
+      color: var(--global-theme-color);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
+      text-underline-offset: 3px;
+      &:hover { color: var(--global-hover-color); text-decoration-color: currentColor; }
+    }
+
     .dot {
       flex-shrink: 0;
       width: 7px;

@@ -6,12 +6,13 @@ title: Emad Bahrami # the website title (if blank, full name will be used instea
 first_name: Emad
 middle_name:
 last_name: Bahrami
-email: bahrami@iai.uni-bonn.de
+email: emadbahramirad@gmail.com
+cv_pdf: /assets/pdf/Emad_Bahrami_CV.pdf # linked from the hero (status line + CV button)
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Emad Bahrami, PhD candidate at the University of Bonn working on video understanding and multimodal LLMs.
+  Emad Bahrami, PhD candidate at the University of Bonn working on video understanding, multimodal LLMs, and RL post-training.
 footer_text: >
   Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/alshedivat/al-folio">al-folio</a>.
-keywords: Emad Bahrami, computer vision, video understanding, multimodal LLMs, temporal action segmentation, research scientist
+keywords: Emad Bahrami, computer vision, video understanding, multimodal LLMs, temporal action segmentation, research scientist, reinforcement learning, world models, research engineer
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon:  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)

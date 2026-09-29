@@ -24,7 +24,10 @@ layout: default
             {% if page.subtitle -%}<p class="hero-role">{{ page.subtitle }}</p>{%- endif %}
             {% if page.focus -%}<p class="hero-focus">{{ page.focus }}</p>{%- endif %}
             {% if page.job_market -%}
-            <p class="hero-status"><span class="dot"></span>{{ page.job_market }}</p>
+            <p class="hero-status"><span class="dot"></span><span>{{ page.job_market }}
+              {%- if site.cv_pdf %} <a href="{{ site.cv_pdf | relative_url }}">CV</a>{% endif -%}
+              {%- if site.email %} · <a href="mailto:{{ site.email | encode_email }}">Email</a>{% endif -%}
+            </span></p>
             {%- endif %}
             {%- if page.social %}
             <div class="hero-links">
