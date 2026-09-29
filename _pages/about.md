@@ -6,7 +6,7 @@ permalink: /
 # Hero (edit these lines freely; delete `job_market` to hide the green status line)
 subtitle: PhD candidate · Computer Vision Group, University of Bonn
 focus: Video understanding · Multimodal LLMs · RL post-training · World models
-job_market: "Seeking Research Scientist / Research Engineer roles in multimodal LLMs, video understanding & RL post-training."  # CV + Email links are appended automatically
+job_market: "Seeking Research Scientist / Research Engineer roles in multimodal and generative AI, including video models, world models, and RL post-training."  # CV + Email links are appended automatically
 
 profile:
   image: emadbr.jpg
