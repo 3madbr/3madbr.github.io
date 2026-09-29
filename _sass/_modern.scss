@@ -158,19 +158,22 @@ footer.sticky-bottom {
 
   .hero-status {
     display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.55rem;
     font-size: 0.85rem;
     font-weight: 500;
+    line-height: 1.5;
     color: var(--global-success-color);
     background-color: var(--global-success-soft);
-    border-radius: 999px;
-    padding: 0.25rem 0.8rem;
+    border-radius: 10px;   // not a full pill: the text may wrap to 2-3 lines
+    padding: 0.4rem 0.85rem;
     margin: 0 0 1.1rem;
 
     .dot {
+      flex-shrink: 0;
       width: 7px;
       height: 7px;
+      margin-top: 0.45rem;  // centre on the first line of text
       border-radius: 50%;
       background-color: var(--global-success-color);
       box-shadow: 0 0 0 3px var(--global-success-soft);
