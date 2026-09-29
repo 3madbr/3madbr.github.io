@@ -1,3 +1,34 @@
+# 3madbr.github.io
+
+Personal website of Emad Bahrami, built on the [al-folio](https://github.com/alshedivat/al-folio) Jekyll theme (upstream README below).
+
+## Preview locally (macOS)
+
+Requires Ruby 3.x (e.g. via rbenv). Then:
+
+```bash
+./bin/serve
+```
+
+Open http://localhost:4000. The page reloads automatically when you save a file. `bin/serve` uses `_config_dev.yml` on top of `_config.yml`, which turns off analytics and ImageMagick for local builds.
+
+## Where to edit
+
+| What | File |
+|---|---|
+| Hero (role, research focus, job-market line) and bio | `_pages/about.md` |
+| Publications (`selected={true}` → shown on home page) | `_bibliography/papers.bib` |
+| Paper thumbnails | `assets/img/publication_preview/` |
+| News items | `_news/*.md` |
+| Colours (light/dark) | `_sass/_themes.scss` |
+| Layout and component styles | `_sass/_modern.scss` |
+
+## Deploy
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site and publishes it to the `gh-pages` branch. Pull requests build without deploying, so opening a PR is a safe way to check the build before merging.
+
+---
+
 # al-folio
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [maintainers]: https://img.shields.io/badge/maintainers-3-success.svg 'Number of maintainers'
