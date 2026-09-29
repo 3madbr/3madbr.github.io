@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 
-# Hero (edit these lines freely; delete `job_market` to hide the green status pill)
+# Hero (edit these lines freely; delete `job_market` to hide the green status line)
 subtitle: PhD candidate · Computer Vision Group, University of Bonn
 focus: Video understanding · Multimodal LLMs · Temporal modeling
 job_market: "Open to Research Scientist / Research Engineer positions in Multimodal AI, Video Understanding, Generative Models, and Efficient AI."

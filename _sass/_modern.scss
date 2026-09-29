@@ -164,9 +164,6 @@ footer.sticky-bottom {
     font-weight: 500;
     line-height: 1.5;
     color: var(--global-success-color);
-    background-color: var(--global-success-soft);
-    border-radius: 10px;   // not a full pill: the text may wrap to 2-3 lines
-    padding: 0.4rem 0.85rem;
     margin: 0 0 1.1rem;
 
     .dot {
@@ -255,15 +252,16 @@ footer.sticky-bottom {
     line-height: 1.75;
     margin-bottom: 1rem;
   }
+  // Links in the accent colour with a faint underline, so they read as clickable.
   a {
-    color: var(--global-text-color);
+    color: var(--global-theme-color);
     text-decoration: underline;
-    text-decoration-color: var(--global-divider-color);
+    text-decoration-color: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     &:hover {
-      color: var(--global-theme-color);
-      text-decoration-color: var(--global-theme-color);
+      color: var(--global-hover-color);
+      text-decoration-color: currentColor;
     }
   }
   strong { color: var(--global-heading-color); }
