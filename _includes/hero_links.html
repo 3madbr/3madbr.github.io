@@ -1,3 +1,6 @@
+{%- if site.cv_pdf -%}
+<a class="hero-btn" href="{{ site.cv_pdf | relative_url }}"><i class="fas fa-file-alt"></i>CV</a>
+{%- endif -%}
 {%- if site.email -%}
 <a class="hero-btn" href="mailto:{{ site.email | encode_email }}"><i class="fas fa-envelope"></i>Email</a>
 {%- endif -%}

@@ -158,19 +158,30 @@ footer.sticky-bottom {
 
   .hero-status {
     display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.55rem;
     font-size: 0.85rem;
     font-weight: 500;
+    line-height: 1.5;
     color: var(--global-success-color);
-    background-color: var(--global-success-soft);
-    border-radius: 999px;
-    padding: 0.25rem 0.8rem;
     margin: 0 0 1.1rem;
 
+    > span { color: inherit; }  // base theme colours every <span>; keep the green
+
+    // CV / Email links after the status text: accent colour, like the bio links.
+    a {
+      color: var(--global-theme-color);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
+      text-underline-offset: 3px;
+      &:hover { color: var(--global-hover-color); text-decoration-color: currentColor; }
+    }
+
     .dot {
+      flex-shrink: 0;
       width: 7px;
       height: 7px;
+      margin-top: 0.45rem;  // centre on the first line of text
       border-radius: 50%;
       background-color: var(--global-success-color);
       box-shadow: 0 0 0 3px var(--global-success-soft);
@@ -252,15 +263,16 @@ footer.sticky-bottom {
     line-height: 1.75;
     margin-bottom: 1rem;
   }
+  // Links in the accent colour with a faint underline, so they read as clickable.
   a {
-    color: var(--global-text-color);
+    color: var(--global-theme-color);
     text-decoration: underline;
-    text-decoration-color: var(--global-divider-color);
+    text-decoration-color: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     &:hover {
-      color: var(--global-theme-color);
-      text-decoration-color: var(--global-theme-color);
+      color: var(--global-hover-color);
+      text-decoration-color: currentColor;
     }
   }
   strong { color: var(--global-heading-color); }

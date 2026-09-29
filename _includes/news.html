@@ -8,7 +8,9 @@
     {%- assign news_limit = news_size -%}
   {%- endif %}
   <ul class="news-list">
-    {% for item in news limit: news_limit -%}
+    {%- comment -%} Show the newest `news_limit` items, plus any item with `pinned: true` (kept in date order). {%- endcomment %}
+    {% for item in news -%}
+    {%- unless forloop.index <= news_limit or item.pinned -%}{%- continue -%}{%- endunless %}
     <li>
       <time class="news-date" datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %Y" }}</time>
       <span class="news-text">
