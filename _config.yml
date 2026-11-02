@@ -7,7 +7,6 @@ first_name: Emad
 middle_name:
 last_name: Bahrami
 email: emadbahramirad@gmail.com
-cv_pdf: /assets/pdf/Emad_Bahrami_CV.pdf # linked from the hero (status line + CV button)
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Emad Bahrami, PhD candidate at the University of Bonn working on video understanding, multimodal LLMs, and RL post-training.
 footer_text: >
